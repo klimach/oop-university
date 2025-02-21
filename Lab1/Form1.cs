@@ -90,7 +90,7 @@ namespace Lab1Project
 
             if (emptyFields.Count != 0)
             {
-                task1richBoxOutput.Text = $"Next variables are not populated: {string.Join(',', emptyFields)}";
+                task1richBoxOutput.Text = $"Наступні значення не заповнені: {string.Join(',', emptyFields)}";
                 return;
             }
             try
@@ -100,7 +100,7 @@ namespace Lab1Project
             }
             catch (DivideByZeroException)
             {
-                task1richBoxOutput.Text = $"Devide by zero. Please check variables";
+                task1richBoxOutput.Text = $"Ділення на нуль";
             }
 
             return;
@@ -131,10 +131,8 @@ namespace Lab1Project
                 task2richText_Output.Text = output;
             } else
             {
-                task2richText_Output.Text = "Дистанція проти течії не може бути вищою ніж по озеру";
+                task2richText_Output.Text = "Швидкість проти течії не може бути вищою ніж по озеру";
             }
-
-
         }
 
         /////////////// TASK 3 ///////////////
@@ -236,7 +234,13 @@ namespace Lab1Project
             }
 
             List<int> roots = FindIntegerRoots(varA, varB, varC, varD);
-            task5richTextOutput.Text = $"Цілі корені рівняння: {string.Join(',', roots)}";
+            if (roots.Count == 0)
+            {
+                task5richTextOutput.Text = $"Рівняння немає коренів";
+            } else
+            {
+                task5richTextOutput.Text = $"Цілі корені рівняння: {string.Join(',', roots)}";
+            }
         }
 
         /////////////// TASK 6 ///////////////
@@ -341,7 +345,7 @@ namespace Lab1Project
                 return;
             }
 
-            List<int> intersectedElements = listA_elements.Intersect(listB_elements).ToList();
+            List<int> intersectedElements = listA_elements.Intersect(listB_elements.Distinct()).ToList();
             if (intersectedElements.Count == 0)
             {
                 output = "Жоден елемент списку B не входить в список А";
