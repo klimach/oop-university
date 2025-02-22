@@ -1,9 +1,10 @@
 ﻿using System.Data;
+using System.Diagnostics;
 using System.Text;
 
 namespace Lab2Project
 {
-    public class Organization
+    public class Organization : IDisposable
     {
         private string name = string.Empty;
         private OrganizationPostalAddress? postalAddress = null;
@@ -20,9 +21,10 @@ namespace Lab2Project
         }
 
         public Organization() { }
-        ~Organization()
+        public void Dispose()
         {
-            postalAddress = null;
+            PostalAddress?.Dispose();
+            GC.SuppressFinalize(this);
         }
         public Organization(string organizationName)
         {
@@ -44,7 +46,7 @@ namespace Lab2Project
             return name;
         }
     }
-    public class OrganizationPostalAddress
+    public class OrganizationPostalAddress : IDisposable
     {
         ///////////// Attributes //////////////
         private string country = string.Empty;
@@ -107,10 +109,10 @@ namespace Lab2Project
             building = organizationPostalAddress.Building;
         }
 
-        ///////////// Destructor //////////////
-        ~OrganizationPostalAddress()
+        public void Dispose()
         {
-            Console.WriteLine("Object destroyed");
+            Trace.WriteLine("OrganizationPostalAddress object disposed.");
+            GC.SuppressFinalize(this);
         }
 
         ///////////// Static method //////////////

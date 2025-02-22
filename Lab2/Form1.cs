@@ -79,6 +79,7 @@ namespace Lab2Project
         private void RemoveOrg_button_Click(object sender, EventArgs e)
         {
             if (orgList_listBox.SelectedItem is null) return;
+            ((Organization)orgList_listBox.SelectedItem).Dispose();
             orgList_listBox.Items.Remove(orgList_listBox.SelectedItem);
         }
 
