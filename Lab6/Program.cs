@@ -11,11 +11,11 @@ namespace Lab6Project
             {
                 Console.WriteLine("Enter 3 sides (one-by-one) of Triange to calculate it's Area:");
                 Triangle triangle = RetrieveTriangleFromUser();
-                Console.WriteLine($"Triangle Area =: {triangle.GetTriangleArea()}");
+                Console.WriteLine($"Triangle Area = {triangle.GetTriangleArea()}");
             }
             catch (FormatException ex)
             {
-                errorReason = "Entered number is in incorrect format. Expected examples: '1', '124,5', '12.3'";
+                errorReason = "Entered number is in incorrect format. Expected examples: '1', '124,5', '12.3', etc";
             }
             catch (ArgumentException ex)
             {
@@ -32,18 +32,19 @@ namespace Lab6Project
 
             if (!string.IsNullOrEmpty(errorReason))
             {
-                Console.WriteLine(errorReason);
+                Console.WriteLine($"Error: {errorReason}");
             }
         }
 
         private static Triangle RetrieveTriangleFromUser()
         {
             double[] sides = new double[3];
-            for (int i = 1; i <= 3; i++)
+            foreach (var side in new string[] { "a", "b", "c" }.Select((value, index) => new { value, index }))
             {
-                Console.Write($"Side {i} = ");
-                string? consoleInput = Console.ReadLine();
-                sides[i - 1] = double.Parse(consoleInput);
+            
+                Console.Write($"Side {side.value} = ");
+                string? consoleInput = Console.ReadLine()?.Replace('.', ',');
+                sides[side.index] = double.Parse(consoleInput);
             }
 
             return new Triangle(sides[0], sides[1], sides[2]);
