@@ -1,25 +1,17 @@
-﻿using System.Text.RegularExpressions;
-
 namespace Lab5Project
 {
-    internal class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        ///  The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
         {
-            Console.WriteLine("Type 'Exit' for close programm");
-            while (true)
-            {
-                Console.Write("Input >: ");
-                string? input = Console.ReadLine();
-                if (input != null)
-                {
-                    if (input.Trim().ToLower().Equals("exit"))
-                    {
-                        break;
-                    }
-                    Console.WriteLine($"Output >: {Regex.Replace(input, @"\s+", " ")}");
-                }
-            }
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
+            Application.Run(new Form1());
         }
     }
 }
