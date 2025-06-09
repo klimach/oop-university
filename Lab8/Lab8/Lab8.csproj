@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\align-center.png" />
+    <None Remove="images\align-left.png" />
+    <None Remove="images\align-right.png" />
+    <None Remove="images\bold.png" />
+    <None Remove="images\floppy-disk.png" />
+    <None Remove="images\italic.png" />
+    <None Remove="images\open-folder.png" />
+    <None Remove="images\photo.png" />
+    <None Remove="images\underline.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\align-center.png" />
+    <Resource Include="images\align-left.png" />
+    <Resource Include="images\align-right.png" />
+    <Resource Include="images\bold.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\floppy-disk.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\italic.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\open-folder.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\photo.png" />
+    <Resource Include="images\underline.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>
