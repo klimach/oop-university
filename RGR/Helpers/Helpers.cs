@@ -29,24 +29,32 @@ namespace RGR.Helpers
                 { "day", today.ToString("dd") },
                 { "month", today.ToString("MMMM") },
                 { "year", today.ToString("yyyy") },
-                { "fullNameGenitive", GetFullNameGenetive(person, GrammaticalCase.Genitive) },
-                { "fullNameDative", GetFullNameGenetive(person, GrammaticalCase.Dative) }
+                { "fullNameGenitive", GetFullNameGenetive(
+                    person, GrammaticalCase.Genitive) },
+                { "fullNameDative", GetFullNameGenetive(
+                    person, GrammaticalCase.Dative) }
             };
         }
 
-        private static string GetFullNameGenetive(Person person, GrammaticalCase gramCase)
+        private static string GetFullNameGenetive(
+            Person person, GrammaticalCase gramCase)
         {
-            Gender gender = person.Gender.ToLower().Equals("він") ? Gender.Male : Gender.Female;
+            Gender gender = person.Gender.ToLower().Equals("він") ? 
+                Gender.Male : Gender.Female;
 
-            string secondNameGen = UaNameDecliner.Decline(person.SecondName, gender, gramCase);
-            string firstNameGen = UaNameDecliner.Decline(person.FirstName, gender, gramCase);
+            string secondNameGen = UaNameDecliner.Decline(
+                person.SecondName, gender, gramCase);
+            string firstNameGen = UaNameDecliner.Decline(
+                person.FirstName, gender, gramCase);
             string middleNameGen = string.Empty;
             if (!string.IsNullOrEmpty(person.MiddleName))
             {
-                middleNameGen = UaNameDecliner.Decline(person.MiddleName ?? "", gender, gramCase);
+                middleNameGen = UaNameDecliner.Decline(
+                    person.MiddleName ?? "", gender, gramCase);
             }
 
-            return string.Join(" ", new[] { secondNameGen, firstNameGen, middleNameGen }
+            return string.Join(" ", 
+                new[] { secondNameGen, firstNameGen, middleNameGen }
                 .Where(s => !string.IsNullOrWhiteSpace(s)));
         }
     }

@@ -18,7 +18,9 @@ namespace RGR.Providers
             };
         }
 
-        public void GenerateDocumentFromTemplate(string templatePath, string outputPath, Dictionary<string, string> placeholders)
+        public void GenerateDocumentFromTemplate(
+            string templatePath, string outputPath, 
+            Dictionary<string, string> placeholders)
         {
             Word.Document? doc = null;
 

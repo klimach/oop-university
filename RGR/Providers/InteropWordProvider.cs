@@ -6,9 +6,11 @@ namespace RGR.Providers
 {
     public class InteropWordProvider : IWordProvider
     {
-        public void GenerateDocumentFromTemplate(string templatePath, string outputPath, Dictionary<string, string> placeholders)
+        public void GenerateDocumentFromTemplate(
+            string templatePath, string outputPath, 
+            Dictionary<string, string> placeholders)
         {
-            Word.Application wordApp = new Word.Application();
+            Word.Application wordApp = new();
             Word.Document? doc = null;
 
             try

@@ -5,7 +5,9 @@ namespace RGR.Providers
 {
     public class OpenXmlWordProvider : IWordProvider
     {
-        public void GenerateDocumentFromTemplate(string templatePath, string outputPath, Dictionary<string, string> placeholders)
+        public void GenerateDocumentFromTemplate(
+            string templatePath, string outputPath, 
+            Dictionary<string, string> placeholders)
         {
             //TODO: Занадто спрощена логіка, деякі плейсхолдери не замінюються як очікується.
 

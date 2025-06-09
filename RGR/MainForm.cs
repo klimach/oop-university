@@ -1,13 +1,13 @@
 ﻿using RGR.Controllers;
-using RGR.Interfaces;
 using RGR.Models;
 using RGR.Providers;
+using System.ComponentModel;
 
 namespace RGR
 {
     public partial class MainForm : Form
     {
-        private DBController _dbController;
+        private readonly DBController _dbController;
         //private IWordProvider _wordProvider;
 
         private bool isAllSelected = false;
@@ -64,7 +64,7 @@ namespace RGR
             btnSelectAll.Text = isAllSelected ? "Зняти всі" : "Обрати всі";
         }
 
-        private void cmsLVPeople_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void cmsLVPeople_Opening(object sender, CancelEventArgs e)
         {
             Point mousePos = lvPeople.PointToClient(Cursor.Position);
             ListViewItem? item = lvPeople.GetItemAt(mousePos.X, mousePos.Y);
@@ -181,44 +181,54 @@ namespace RGR
         {
             if (lvPeople.CheckedItems.Count == 0)
             {
-                MessageBox.Show("Будь ласка, виберіть хоча б одну людину.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Будь ласка, виберіть хоча б одну людину.", 
+                    "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (clbTemplates.CheckedItems.Count == 0)
             {
-                MessageBox.Show("Будь ласка, виберіть хоча б один шаблон документа.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Будь ласка, виберіть хоча б один шаблон документа.", 
+                    "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(tbOutputFolder.Text) || !Directory.Exists(tbOutputFolder.Text))
+            if (string.IsNullOrWhiteSpace(tbOutputFolder.Text) || 
+                !Directory.Exists(tbOutputFolder.Text))
             {
-                MessageBox.Show("Будь ласка, виберіть коректну папку для збереження.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Будь ласка, виберіть коректну папку для збереження.", 
+                    "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            using InteropWordProvider2 wordProvider = new InteropWordProvider2();
+            using InteropWordProvider2 wordProvider = new();
 
-            string templatesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Templates");
+            string templatesPath = Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory, "Templates");
             foreach (ListViewItem item in lvPeople.CheckedItems)
             {
                 if (item.Tag is Person person)
                 {
-                    string personFolder = Path.Combine(tbOutputFolder.Text, $"{person.FullName} {person.BirthDate}");
+                    string personFolder = Path.Combine(tbOutputFolder.Text, 
+                        $"{person.FullName} {person.BirthDate}");
                     if (!Directory.Exists(personFolder))
                     {
                         Directory.CreateDirectory(personFolder);
                     }
                     foreach (var template in clbTemplates.CheckedItems)
                     {
-                        string templateFile = Path.Combine(templatesPath, $"{template}.docx");
-                        string outputFile = Path.Combine(personFolder, $"{template} - {person.ShortName}.docx");
-                        wordProvider.GenerateDocumentFromTemplate(templateFile, outputFile, Helpers.Helpers.GetMappingDict(person));
+                        string templateFile = Path.Combine(
+                            templatesPath, $"{template}.docx");
+                        string outputFile = Path.Combine(personFolder, 
+                            $"{template} - {person.ShortName}.docx");
+                        wordProvider.GenerateDocumentFromTemplate(templateFile, 
+                            outputFile, Helpers.Helpers.GetMappingDict(person));
                     }
                 }
             }
 
-            MessageBox.Show("Документи успішно згенеровано.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Документи успішно згенеровано.", 
+                "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void lvPeople_SelectedIndexChanged(object sender, EventArgs e)

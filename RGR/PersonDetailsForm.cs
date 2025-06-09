@@ -177,7 +177,8 @@ namespace RGR
 
         private void tbPhoneNumber_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.KeyCode == Keys.Left || e.KeyCode == Keys.Back) && tbPhoneNumber.SelectionStart <= 4)
+            if ((e.KeyCode == Keys.Left || e.KeyCode == Keys.Back) && 
+                tbPhoneNumber.SelectionStart <= 4)
             {
                 e.Handled = true;
                 e.SuppressKeyPress = true;
@@ -250,7 +251,9 @@ namespace RGR
             tbMiddleName.Text = person.MiddleName;
             cbGender.Text = person.Gender;
 
-            dtpBirthDate.Value = DateTime.ParseExact(person.BirthDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            dtpBirthDate.Value = DateTime.ParseExact(
+                person.BirthDate, "yyyy-MM-dd", 
+                System.Globalization.CultureInfo.InvariantCulture);
             rtbAddress.Text = person.Address;
             tbPhoneNumber.Text = person.Phone;
             tbEmail.Text = person.Email;
@@ -258,7 +261,9 @@ namespace RGR
             tbPassportNumber.Text = person.PassportNumber;
             if (!string.IsNullOrWhiteSpace(person.PassportIssueDate))
             {
-                dtpPassportIssueDate.Value = DateTime.ParseExact(person.PassportIssueDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+                dtpPassportIssueDate.Value = DateTime.ParseExact(
+                    person.PassportIssueDate, "yyyy-MM-dd", 
+                    System.Globalization.CultureInfo.InvariantCulture);
                 dtpPassportIssueDate.Checked = true;
             }
             else
@@ -277,19 +282,24 @@ namespace RGR
         {
             person.SecondName = tbSecondName.Text.Trim();
             person.FirstName = tbFirstName.Text.Trim();
-            person.MiddleName = string.IsNullOrWhiteSpace(tbMiddleName.Text) ? null : tbMiddleName.Text.Trim();
+            person.MiddleName = string.IsNullOrWhiteSpace(tbMiddleName.Text) ? 
+                null : tbMiddleName.Text.Trim();
             person.Gender = cbGender.SelectedItem!.ToString()!;
             person.BirthDate = dtpBirthDate.Value.ToString("yyyy-MM-dd");
             person.Address = rtbAddress.Text.Trim();
             person.Phone = tbPhoneNumber.Text.Trim();
             person.Email = tbEmail.Text.Trim();
-            person.PassportNumber = string.IsNullOrWhiteSpace(tbPassportNumber.Text) ? null : tbPassportNumber.Text.Trim();
+            person.PassportNumber = string.IsNullOrWhiteSpace(tbPassportNumber.Text) ? 
+                null : tbPassportNumber.Text.Trim();
             person.PassportIssueDate = (dtpPassportIssueDate.Checked)
                 ? dtpPassportIssueDate.Value.ToString("yyyy-MM-dd")
                 : null;
-            person.PassportIssuedBy = string.IsNullOrWhiteSpace(rtbPassportIssuedBy.Text) ? null : rtbPassportIssuedBy.Text.Trim();
-            person.JobTitle = string.IsNullOrWhiteSpace(tbJobTitle.Text) ? null : tbJobTitle.Text.Trim();
-            person.Organization = string.IsNullOrWhiteSpace(tbOrganization.Text) ? null : tbOrganization.Text.Trim();
+            person.PassportIssuedBy = string.IsNullOrWhiteSpace(rtbPassportIssuedBy.Text) ? 
+                null : rtbPassportIssuedBy.Text.Trim();
+            person.JobTitle = string.IsNullOrWhiteSpace(tbJobTitle.Text) ? 
+                null : tbJobTitle.Text.Trim();
+            person.Organization = string.IsNullOrWhiteSpace(tbOrganization.Text) ? 
+                null : tbOrganization.Text.Trim();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
